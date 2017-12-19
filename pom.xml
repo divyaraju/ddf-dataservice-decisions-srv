@@ -19,6 +19,13 @@
   <build>
 	<plugins>
 		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+			</configuration>
+		</plugin>
+		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-jar-plugin</artifactId>
 			<configuration>
@@ -31,4 +38,18 @@
 		</plugin>
 	</plugins>
   </build>
+  
+  <distributionManagement>
+  	<snapshotRepository>
+    	<id>private.repo.snaps</id>
+      	<name>Private Nexus Snapshot Repository</name>
+      	<url>https://nexus.services.aws.lumeris.com:8443/content/repositories/snapshots/</url>
+    </snapshotRepository>
+    <repository>
+      <id>private.repo.releases</id>
+      <name>Private Nexus Repository</name>
+      <url>https://nexus.services.aws.lumeris.com:8443/content/repositories/releases/</url>
+    </repository>
+  </distributionManagement>
+  
 </project>

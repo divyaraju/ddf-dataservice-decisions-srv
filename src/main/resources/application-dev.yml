@@ -1,0 +1,7 @@
+server:
+    port: 8080
+    ssl:
+        key-password: ldp-services-key-secret
+        key-store: file:///security/keystore.jks
+        key-store-password: ldp-services-keystore-secret
+    context-path: /dataservice/decisions/

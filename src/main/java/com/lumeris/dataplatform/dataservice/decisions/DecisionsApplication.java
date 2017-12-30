@@ -1,4 +1,4 @@
-package com.lumeris.dataplatform.dataservice.decisionsservice;
+package com.lumeris.dataplatform.dataservice.decisions;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

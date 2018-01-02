@@ -7,7 +7,7 @@ public class PatientRosterSummary {
 	String acoIdentifier;
 	String patientNumber;
 	String firstName;
-	String middelName;
+	String middleName;
 	String lastName;
 	String gender;
 	String birthDate;
@@ -62,12 +62,12 @@ public class PatientRosterSummary {
 		this.firstName = firstName;
 	}
 
-	public String getMiddelName() {
-		return middelName;
+	public String getMiddleName() {
+		return middleName;
 	}
 
-	public void setMiddelName(String middelName) {
-		this.middelName = middelName;
+	public void setMiddleName(String middelName) {
+		this.middleName = middelName;
 	}
 
 	public String getLastName() {

@@ -23,7 +23,7 @@ public class SwaggerConfig {
 	private String description = "Decisions Dataservice";
 	private String title = "Decisions API";
 	private String version = "v1";
-	private Contact contact = new Contact("Divya Penmetsa", "link to wiki.......", "spenmetsa@lumeris.com");
+	private Contact contact = new Contact("Divya Penmetsa", "https://confluence.lumeris.com/display/PM/Decisions", "spenmetsa@lumeris.com");
 
 	@Bean
 	public Docket api() {

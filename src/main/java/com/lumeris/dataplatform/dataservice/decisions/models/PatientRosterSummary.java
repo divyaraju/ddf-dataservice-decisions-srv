@@ -28,6 +28,7 @@ public class PatientRosterSummary {
 	String inPatientVisitsPrior6M;
 	String outPatientVisitsPrior6M;
 	String unplannedAdmit;
+	enum readmitRiskValue {};
 	String commercialInsurancePolicy;
 
 	public String getMedicareHealthInsCardNumber() {

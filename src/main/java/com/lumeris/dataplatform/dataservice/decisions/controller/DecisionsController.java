@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,10 +40,9 @@ public class DecisionsController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Server error"),
 			@ApiResponse(code = 200, message = "OK", response = PatientRosterSummary.class) })
 	@Secured({"ROLE_READ_PATIENT_SUMMARY","ROLE_ADMIN"})
-	@RequestMapping(value = "_search", method = RequestMethod.GET)
+	@RequestMapping(value = "allPatients/_search", method = RequestMethod.GET)
 
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = "med_hic_number", value = "medicare health insurance card number, the number that is associated with the patient's medical record", required = false, paramType = "query"),
 		@ApiImplicitParam(name = "client_schema", value = "Client name/schema, in order to return the documents specific to a client", required = false, paramType = "query") })
 	public List<PatientRosterSummary> getPatientRosterSummary(@PathVariable String client_schema) throws ParseException {
 		return decisionsBO.getPatientRosterSummary(client_schema);
@@ -65,5 +66,4 @@ public class DecisionsController {
 
 		return patientRoster;
 	}
-	
 }

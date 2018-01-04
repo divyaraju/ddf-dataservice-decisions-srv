@@ -11,7 +11,7 @@ public class PatientRosterSummary {
 	String lastName;
 	String gender;
 	String birthDate;
-	String age;
+	int age;
 	String primaryClinic;
 	String primaryCareProvider;
 
@@ -95,11 +95,11 @@ public class PatientRosterSummary {
 		this.birthDate = birthDate;
 	}
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 

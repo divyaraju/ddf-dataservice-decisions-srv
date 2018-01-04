@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lumeris.dataplatform.dataservice.decisions.BO.DecisionsBO;
 import com.lumeris.dataplatform.dataservice.decisions.BO.DecisionsBOImpl;
-import com.lumeris.dataplatform.dataservice.decisions.models.PatientRosterDetails;
+import com.lumeris.dataplatform.dataservice.decisions.models.PatientDetails;
 import com.lumeris.dataplatform.dataservice.decisions.models.PatientRosterSummary;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -49,13 +49,13 @@ public class DecisionsController {
 	}
 
 	@ApiOperation(value = "Produces Patient Roster document with list of Extracts and Risk Models for the provided client and patient Id.",
-			notes = "Produces Patient Roster document with list of Extracts and Risk Models for the provided client and patient Id.", response = PatientRosterDetails.class)
+			notes = "Produces Patient Roster document with list of Extracts and Risk Models for the provided client and patient Id.", response = PatientDetails.class)
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Server error"),
-			@ApiResponse(code = 200, message = "OK", response = PatientRosterDetails.class) })
+			@ApiResponse(code = 200, message = "OK", response = PatientDetails.class) })
     @Secured({"ROLE_READ_PATIENT_SUMMARY","ROLE_ADMIN"})
 	@RequestMapping(value = "patientDetails/{_client_schema}/{_id}", method = RequestMethod.GET)
-	public PatientRosterDetails getPatientRosterById(@PathVariable String _client_schema, @PathVariable String _id) throws Exception {
-		PatientRosterDetails patientRoster = null;
+	public PatientDetails getPatientRosterById(@PathVariable String _client_schema, @PathVariable String _id) throws Exception {
+		PatientDetails patientRoster = null;
 		if (logger.isDebugEnabled()) {
 			logger.debug("_id === : " + _id);
 			logger.debug("_client_schema === : " + _client_schema);

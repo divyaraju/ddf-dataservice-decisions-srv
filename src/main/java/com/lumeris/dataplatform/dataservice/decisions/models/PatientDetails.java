@@ -2,7 +2,7 @@ package com.lumeris.dataplatform.dataservice.decisions.models;
 
 import java.util.List;
 
-public class PatientRosterDetails {
+public class PatientDetails {
 
 	List<AdtDetails> adtDetails;
 	List<RiskModel> riskModel;

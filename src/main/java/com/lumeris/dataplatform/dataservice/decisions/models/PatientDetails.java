@@ -2,8 +2,17 @@ package com.lumeris.dataplatform.dataservice.decisions.models;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class PatientDetails {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 	List<AdtDetails> adtDetails;
 	List<RiskModel> riskModel;
 

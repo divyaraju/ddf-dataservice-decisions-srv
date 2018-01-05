@@ -157,7 +157,21 @@
     		<groupId>com.googlecode.json-simple</groupId>
     		<artifactId>json-simple</artifactId>
     		<version>1.1.1</version>
-		</dependency>	
+		</dependency>
+		<!-- Postgres dependencies  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency> 
+		<dependency> 
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4-1200-jdbc4</version>
+			</dependency>
 	</dependencies>
   
 </project>

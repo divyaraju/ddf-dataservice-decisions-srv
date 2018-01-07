@@ -7,8 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.lumeris.dataplatform.dataservice.decisions.models.PatientRosterSummary;
 
-public interface ClientRepository extends JpaRepository<PatientRosterSummary, String> {
+public interface PatientRosterRepository extends JpaRepository<PatientRosterSummary, String> {
 
-	public List<PatientRosterSummary> findByLastname(@Param("firstname") String firstname);
+	public List<PatientRosterSummary> findByFirstName(@Param("firstname") String firstname);
 
 }

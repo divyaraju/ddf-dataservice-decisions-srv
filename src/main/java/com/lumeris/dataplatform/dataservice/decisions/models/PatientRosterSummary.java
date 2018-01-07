@@ -14,53 +14,49 @@ import javax.validation.constraints.NotNull;
 @Table(name = "msj_a2591_production.a2591_elg")
 public class PatientRosterSummary {
 	@Id
-	@Column(name = "APT_ID", nullable = false)
+	@Column(name = "identifier", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
-    private Long id;
-	@Column(name = "APT_CODE_ID")
+	private Long id;
+	@Column(name = "medicarehealthinscardnumber")
 	String medicareHealthInsCardNumber;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "acoidentifier")
 	String acoIdentifier;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "patientnumber")
 	String patientNumber;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "firstname")
 	String firstName;
-	@Column(name = "APT_CODE_ID")
-	String middleName;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "lastname")
 	String lastName;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "gendercode")
 	String gender;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "birthdtm")
 	String birthDate;
-	@Column(name = "APT_CODE_ID")
-	String age;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "primaryclinic")
 	String primaryClinic;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "primarycareprovider")
 	String primaryCareProvider;
 
-//	enum adtStatus {
-//	}
+	// enum adtStatus {
+	// }
 
-//	Date date;
-	@Column(name = "APT_CODE_ID")
-	String facility;
+	// Date date;
+	@Column(name = "adtfacility")
+	String adtFacility;
 
-//	enum patientClass {
-//	}
+	// enum patientClass {
+	// }
 
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "numedprior6m")
 	String emergencyDeptVisitsPrior6M;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "numipprior6m")
 	String inPatientVisitsPrior6M;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "numopprior6m")
 	String outPatientVisitsPrior6M;
-	@Column(name = "APT_CODE_ID")
+	@Column(name = "unplnadmit")
 	String unplannedAdmit;
-//	enum readmitRiskValue {};
-	@Column(name = "APT_CODE_ID")
+	// enum readmitRiskValue {};
+	@Column(name = "commercialinsurancepolicy1")
 	String commercialInsurancePolicy;
 
 	public String getMedicareHealthInsCardNumber() {
@@ -95,14 +91,6 @@ public class PatientRosterSummary {
 		this.firstName = firstName;
 	}
 
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middelName) {
-		this.middleName = middelName;
-	}
-
 	public String getLastName() {
 		return lastName;
 	}
@@ -127,13 +115,13 @@ public class PatientRosterSummary {
 		this.birthDate = birthDate;
 	}
 
-//	public int getAge() {
-//		return age;
-//	}
-//
-//	public void setAge(int age) {
-//		this.age = age;
-//	}
+	// public int getAge() {
+	// return age;
+	// }
+	//
+	// public void setAge(int age) {
+	// this.age = age;
+	// }
 
 	public String getPrimaryClinic() {
 		return primaryClinic;
@@ -159,20 +147,20 @@ public class PatientRosterSummary {
 		this.unplannedAdmit = unplannedAdmit;
 	}
 
-//	public Date getDate() {
-//		return date;
-//	}
-//
-//	public void setDate(Date date) {
-//		this.date = date;
-//	}
+	// public Date getDate() {
+	// return date;
+	// }
+	//
+	// public void setDate(Date date) {
+	// this.date = date;
+	// }
 
-	public String getFacility() {
-		return facility;
+	public String getadtFacility() {
+		return adtFacility;
 	}
 
-	public void setFacility(String facility) {
-		this.facility = facility;
+	public void setadtFacility(String adtFacility) {
+		this.adtFacility = adtFacility;
 	}
 
 	public String getEmergencyDeptVisitsPrior6M() {

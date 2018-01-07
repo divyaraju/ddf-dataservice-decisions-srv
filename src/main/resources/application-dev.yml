@@ -5,17 +5,15 @@ server:
         key-store: file:///security/keystore.jks
         key-store-password: ldp-services-keystore-secret
     context-path: /dataservice/decisions/
-spring:
-    spring:
-        jpa:
-            database: POSTGRESSQL
-            show-sql: true
-            hibernate.ddl-auto: create-drop
-        datasource:
-            platform: postgres
-            driverClassName: org.postgresql.Driver
-            url: testpostgresdms.c87yjuezj1dy.us-west-2.rds.amazonaws.com
-            username: testuser
-            password: testuser
+spring.jpa:
+    database: POSTGRESSQL
+    show-sql: true
+    hibernate.ddl-auto: create-drop
+spring.datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    url: testpostgresdms.c87yjuezj1dy.us-west-2.rds.amazonaws.com
+    username: testuser
+    password: testuser
 
 

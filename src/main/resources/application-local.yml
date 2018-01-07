@@ -2,12 +2,11 @@ server:
     port: 8080
     context-path: /dataservice/decisions/
 spring.jpa:
-    database: POSTGRESSQL
     show-sql: true
     hibernate.ddl-auto: create-drop
 spring.datasource:
     platform: postgres
     driverClassName: org.postgresql.Driver
-    url: testpostgresdms.c87yjuezj1dy.us-west-2.rds.amazonaws.com
+    url: jdbc:postgresql://testpostgresdms.c87yjuezj1dy.us-west-2.rds.amazonaws.com/testpostgres
     username: testuser
     password: testuser

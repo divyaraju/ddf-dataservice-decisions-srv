@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.common.collect.Lists;
 import com.lumeris.dataplatform.dataservice.decisions.BO.DecisionsBO;
 import com.lumeris.dataplatform.dataservice.decisions.BO.DecisionsBOImpl;
-import com.lumeris.dataplatform.dataservice.decisions.models.PatientDetails;
+//import com.lumeris.dataplatform.dataservice.decisions.models.PatientDetails;
 import com.lumeris.dataplatform.dataservice.decisions.models.PatientRosterSummary;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -69,9 +69,9 @@ public class DecisionsController {
 //	}
 
 	@ApiOperation(value = "Produces Patient Roster document with list of Extracts and Risk Models for the provided client and patient Id.",
-			notes = "Produces Patient Roster document with list of Extracts and Risk Models for the provided client and patient Id.", response = PatientDetails.class)
+			notes = "Produces Patient Roster document with list of Extracts and Risk Models for the provided client and patient Id.", response = PatientRosterSummary.class)
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Server error"),
-			@ApiResponse(code = 200, message = "OK", response = PatientDetails.class) })
+			@ApiResponse(code = 200, message = "OK", response = PatientRosterSummary.class) })
     @Secured({"ROLE_READ_PATIENT_SUMMARY","ROLE_ADMIN"})
 	@RequestMapping(value = "patientDetails/{firstname}", method = RequestMethod.GET)
 	public List<PatientRosterSummary> getPatientRosterById(@PathVariable String firstname) throws Exception {

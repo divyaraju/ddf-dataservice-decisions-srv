@@ -6,13 +6,13 @@ server:
         key-store-password: ldp-services-keystore-secret
     context-path: /dataservice/decisions/
 spring.jpa:
-    database: POSTGRESSQL
+    database: testpostgres
     show-sql: true
     hibernate.ddl-auto: create-drop
 spring.datasource:
     platform: postgres
     driverClassName: org.postgresql.Driver
-    url: testpostgresdms.c87yjuezj1dy.us-west-2.rds.amazonaws.com
+    url: jdbc:testpostgresdms.c87yjuezj1dy.us-west-2.rds.amazonaws.com
     username: testuser
     password: testuser
 

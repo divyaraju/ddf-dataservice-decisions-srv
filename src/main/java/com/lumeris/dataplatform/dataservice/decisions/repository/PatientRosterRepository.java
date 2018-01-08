@@ -9,6 +9,6 @@ import com.lumeris.dataplatform.dataservice.decisions.models.PatientRosterSummar
 
 public interface PatientRosterRepository extends JpaRepository<PatientRosterSummary, String> {
 
-	public List<PatientRosterSummary> findByFirstName(@Param("firstname") String firstname);
+	public List<PatientRosterSummary> findAll();
 
 }

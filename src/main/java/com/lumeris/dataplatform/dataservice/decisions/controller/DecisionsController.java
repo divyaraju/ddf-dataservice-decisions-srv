@@ -73,14 +73,11 @@ public class DecisionsController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Server error"),
 			@ApiResponse(code = 200, message = "OK", response = PatientRosterSummary.class) })
     @Secured({"ROLE_READ_PATIENT_SUMMARY","ROLE_ADMIN"})
-	@RequestMapping(value = "patientDetails/{firstname}", method = RequestMethod.GET)
-	public List<PatientRosterSummary> getPatientRosterById(@PathVariable String firstname) throws Exception {
+	@RequestMapping(value = "patientDetails/_search", method = RequestMethod.GET)
+	public List<PatientRosterSummary> getPatientRosterSummary() throws Exception {
 		List<PatientRosterSummary> patientRosterSummaries = Lists.newArrayList();
-		if (logger.isDebugEnabled()) {
-			logger.debug("_id === : " + firstname);
-		}
 
-		patientRosterSummaries = decisionsBO.findByFirstName(firstname);
+		patientRosterSummaries = decisionsBO.findAll();
 
 		return patientRosterSummaries;
 	}

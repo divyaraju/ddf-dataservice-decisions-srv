@@ -13,5 +13,5 @@ public interface DecisionsBO {
 
 //	public PatientDetails getPatientRosterById(String client_schema, String id) throws ParseException;
 
-	public List<PatientRosterSummary> findByFirstName(String firstname) throws ParseException;
+	public List<PatientRosterSummary> findAll() throws ParseException;
 }

@@ -3,6 +3,8 @@ package com.lumeris.dataplatform.dataservice.decisions.BO;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +32,10 @@ public class DecisionsBOImpl implements DecisionsBO {
 //	}
 
 	@Override
-	public List<PatientRosterSummary> findByFirstName(String firstName) throws ParseException {
+	@Transactional
+	public List<PatientRosterSummary> findAll() throws ParseException {
 		// TODO Auto-generated method stub
-		return patientRosterRepository.findByFirstName(firstName);
+		return patientRosterRepository.findAll();
 	}
 
 }

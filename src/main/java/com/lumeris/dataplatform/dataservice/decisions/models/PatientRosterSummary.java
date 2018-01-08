@@ -11,14 +11,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "msj_a2591_production.a2591_elg")
+@Table(name = "vw_patientroster")
 public class PatientRosterSummary {
 	@Id
 	@Column(name = "identifier", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
 	private Long id;
-	@Column(name = "medicarehealthinscardnumber")
+	@Column(name = "patient_id")
 	String medicareHealthInsCardNumber;
 	@Column(name = "acoidentifier")
 	String acoIdentifier;
@@ -26,11 +26,13 @@ public class PatientRosterSummary {
 	String patientNumber;
 	@Column(name = "firstname")
 	String firstName;
+	@Column(name = "middlename")
+	String middlename;
 	@Column(name = "lastname")
 	String lastName;
-	@Column(name = "gendercode")
+	@Column(name = "gender")
 	String gender;
-	@Column(name = "birthdtm")
+	@Column(name = "birthdate")
 	String birthDate;
 	@Column(name = "primaryclinic")
 	String primaryClinic;
@@ -41,22 +43,22 @@ public class PatientRosterSummary {
 	// }
 
 	// Date date;
-	@Column(name = "adtfacility")
+	@Column(name = "facility")
 	String adtFacility;
 
 	// enum patientClass {
 	// }
 
-	@Column(name = "numedprior6m")
+	@Column(name = "emergencydeptvisitsprior6m")
 	String emergencyDeptVisitsPrior6M;
-	@Column(name = "numipprior6m")
+	@Column(name = "inpatientvisitsprior6m")
 	String inPatientVisitsPrior6M;
-	@Column(name = "numopprior6m")
+	@Column(name = "outpatientvisitsprior6m")
 	String outPatientVisitsPrior6M;
-	@Column(name = "unplnadmit")
+	@Column(name = "unplannedadmit")
 	String unplannedAdmit;
 	// enum readmitRiskValue {};
-	@Column(name = "commercialinsurancepolicy1")
+	@Column(name = "commercialinsurancepolicy")
 	String commercialInsurancePolicy;
 
 	public String getMedicareHealthInsCardNumber() {

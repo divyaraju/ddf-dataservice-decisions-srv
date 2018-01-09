@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.google.common.collect.Lists;
-import com.lumeris.dataplatform.dataservice.decisions.models.PatientRosterSummary;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientRosterSummary;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;

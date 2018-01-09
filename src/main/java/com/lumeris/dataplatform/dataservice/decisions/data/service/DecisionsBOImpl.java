@@ -1,4 +1,4 @@
-package com.lumeris.dataplatform.dataservice.decisions.BO;
+package com.lumeris.dataplatform.dataservice.decisions.data.service;
 
 import java.text.ParseException;
 import java.util.List;
@@ -8,11 +8,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lumeris.dataplatform.dataservice.decisions.models.AdtDetails;
-//import com.lumeris.dataplatform.dataservice.decisions.models.PatientDetails;
-import com.lumeris.dataplatform.dataservice.decisions.models.PatientRosterSummary;
-import com.lumeris.dataplatform.dataservice.decisions.repository.AdtDetailsRepository;
-import com.lumeris.dataplatform.dataservice.decisions.repository.PatientRosterRepository;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.AdtDetails;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientRosterSummary;
+import com.lumeris.dataplatform.dataservice.decisions.data.repository.AdtDetailsRepository;
+import com.lumeris.dataplatform.dataservice.decisions.data.repository.PatientRosterRepository;
 
 @Service
 public class DecisionsBOImpl implements DecisionsBO {

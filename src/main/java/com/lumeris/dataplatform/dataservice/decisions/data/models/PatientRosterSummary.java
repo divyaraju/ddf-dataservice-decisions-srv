@@ -1,4 +1,4 @@
-package com.lumeris.dataplatform.dataservice.decisions.models;
+package com.lumeris.dataplatform.dataservice.decisions.data.models;
 
 import java.util.Date;
 

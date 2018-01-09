@@ -1,1 +1,11 @@
 /target/
+/.classpath
+/.project
+/.settings/
+/application.properties
+/bootstrap.properties
+*.iml
+.idea
+.gitignore.bak
+/.factorypath
+/bin/

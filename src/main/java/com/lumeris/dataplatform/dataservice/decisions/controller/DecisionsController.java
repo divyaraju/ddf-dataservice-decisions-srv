@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.Lists;
-import com.lumeris.dataplatform.dataservice.decisions.BO.DecisionsBO;
-import com.lumeris.dataplatform.dataservice.decisions.BO.DecisionsBOImpl;
-import com.lumeris.dataplatform.dataservice.decisions.models.AdtDetails;
-//import com.lumeris.dataplatform.dataservice.decisions.models.PatientDetails;
-import com.lumeris.dataplatform.dataservice.decisions.models.PatientRosterSummary;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.AdtDetails;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientRosterSummary;
+import com.lumeris.dataplatform.dataservice.decisions.data.service.DecisionsBO;
+import com.lumeris.dataplatform.dataservice.decisions.data.service.DecisionsBOImpl;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

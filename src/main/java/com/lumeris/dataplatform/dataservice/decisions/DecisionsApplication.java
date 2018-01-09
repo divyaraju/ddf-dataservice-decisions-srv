@@ -12,8 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @Configuration
 @ComponentScan("com.lumeris.dataplatform.dataservice")
-@EntityScan(basePackages = { "com.lumeris.dataplatform.dataservice.decisions.models" })
-@EnableJpaRepositories(basePackages = { "com.lumeris.dataplatform.dataservice.decisions.repository" })
+@EntityScan(basePackages = { "com.lumeris.dataplatform.dataservice.decisions.data.models" })
+@EnableJpaRepositories(basePackages = { "com.lumeris.dataplatform.dataservice.decisions.data.repository" })
 public class DecisionsApplication {
 
 	public static void main(String[] args) {

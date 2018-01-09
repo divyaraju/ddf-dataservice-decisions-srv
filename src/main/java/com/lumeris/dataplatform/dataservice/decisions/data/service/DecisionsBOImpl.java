@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lumeris.dataplatform.dataservice.decisions.data.models.AdtDetails;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientDetails;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientRosterSummary;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.RiskModel;
 import com.lumeris.dataplatform.dataservice.decisions.data.repository.AdtDetailsRepository;
+import com.lumeris.dataplatform.dataservice.decisions.data.repository.PatientDetailsRepository;
 import com.lumeris.dataplatform.dataservice.decisions.data.repository.PatientRosterRepository;
+import com.lumeris.dataplatform.dataservice.decisions.data.repository.RiskModelRepository;
 
 @Service
 public class DecisionsBOImpl implements DecisionsBO {
@@ -20,12 +24,10 @@ public class DecisionsBOImpl implements DecisionsBO {
 	private PatientRosterRepository patientRosterRepository;
 	@Autowired
 	private AdtDetailsRepository adtDetailsRepository;
-
-//	@Override
-//	public PatientDetails getPatientRosterById(String client_schema, String id) throws ParseException {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Autowired
+	private RiskModelRepository riskModelRepository;
+	@Autowired
+	private PatientDetailsRepository patientDetailsRepository;
 
 	@Override
 	@Transactional
@@ -34,10 +36,22 @@ public class DecisionsBOImpl implements DecisionsBO {
 		return patientRosterRepository.findAll();
 	}
 
-@Override
-public List<AdtDetails> getPatientDetails(String patient_id) throws ParseException {
-	// TODO Auto-generated method stub
-	return adtDetailsRepository.findByFirstName(patient_id);
-}
+	@Override
+	public List<PatientDetails> getPatientDetails(String patient_id) throws ParseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<AdtDetails> getAdtDetails(String patient_id) throws ParseException {
+		// TODO Auto-generated method stub
+		return adtDetailsRepository.findBypatientid(patient_id);
+	}
+
+	@Override
+	public List<RiskModel> getRiskModelDetails(String patient_id) throws ParseException {
+		// TODO Auto-generated method stub
+		return riskModelRepository.findBypatientid(patient_id);
+	}
 
 }

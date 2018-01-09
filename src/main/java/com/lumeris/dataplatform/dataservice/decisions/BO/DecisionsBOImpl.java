@@ -8,8 +8,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lumeris.dataplatform.dataservice.decisions.models.AdtDetails;
 //import com.lumeris.dataplatform.dataservice.decisions.models.PatientDetails;
 import com.lumeris.dataplatform.dataservice.decisions.models.PatientRosterSummary;
+import com.lumeris.dataplatform.dataservice.decisions.repository.AdtDetailsRepository;
 import com.lumeris.dataplatform.dataservice.decisions.repository.PatientRosterRepository;
 
 @Service
@@ -17,13 +19,8 @@ public class DecisionsBOImpl implements DecisionsBO {
 
 	@Autowired
 	private PatientRosterRepository patientRosterRepository;
-
-	@Override
-	public List<PatientRosterSummary> getPatientRosterSummary(String client_schema)
-			throws ParseException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@Autowired
+	private AdtDetailsRepository adtDetailsRepository;
 
 //	@Override
 //	public PatientDetails getPatientRosterById(String client_schema, String id) throws ParseException {
@@ -37,5 +34,11 @@ public class DecisionsBOImpl implements DecisionsBO {
 		// TODO Auto-generated method stub
 		return patientRosterRepository.findAll();
 	}
+
+@Override
+public List<AdtDetails> getPatientDetails(String patient_id) throws ParseException {
+	// TODO Auto-generated method stub
+	return adtDetailsRepository.findByFirstName(patient_id);
+}
 
 }

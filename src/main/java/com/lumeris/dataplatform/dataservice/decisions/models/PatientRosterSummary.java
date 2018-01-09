@@ -18,7 +18,7 @@ public class PatientRosterSummary {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
 	private Long id;
-	@Column(name = "patient_id")
+	@Column(name = "patientid")
 	String medicareHealthInsCardNumber;
 	@Column(name = "acoidentifier")
 	String acoIdentifier;

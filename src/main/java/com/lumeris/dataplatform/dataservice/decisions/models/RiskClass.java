@@ -3,21 +3,17 @@
 //import java.util.Date;
 //import java.util.List;
 //
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//
+//@Entity
 //public class RiskClass {
 //
-//	String classDescription;
 //	List<RiskDrivers> riskDrivers;
+//	@Column(name = "max_sdh_value")
 //	double sdh_value;
+//	@Column(name = "score_date_time")
 //	Date scoreDateTime;
-//	boolean isRiskScore;
-//
-//	public String getClassDescription() {
-//		return classDescription;
-//	}
-//
-//	public void setClassDescription(String classDescription) {
-//		this.classDescription = classDescription;
-//	}
 //
 //	public List<RiskDrivers> getRiskDrivers() {
 //		return riskDrivers;
@@ -41,14 +37,6 @@
 //
 //	public void setScoreDateTime(Date scoreDateTime) {
 //		this.scoreDateTime = scoreDateTime;
-//	}
-//
-//	public boolean isRiskScore() {
-//		return isRiskScore;
-//	}
-//
-//	public void setRiskScore(boolean isRiskScore) {
-//		this.isRiskScore = isRiskScore;
 //	}
 //
 //}

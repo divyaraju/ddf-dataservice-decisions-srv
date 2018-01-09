@@ -18,13 +18,21 @@ public class AdtDetails {
 	@Column(name = "identifier", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
-	String identifier;
-	@Column(name = "patient_id")
+	Integer identifier;
+	@Column(name = "patientid")
 	String medicareHealthInsCardNumber;
 	@Column(name = "acoidentifier")
-	String acoid;
-//	@Column
-//	String demographicsReference;
+	String acoIdentifier;
+	@Column(name = "firstname")
+	String firstName;
+	@Column(name = "middlename")
+	String middleName;
+	@Column(name = "lastname")
+	String lastName;
+	@Column(name = "gendercode")
+	String gender;
+	@Column(name = "birthdtm")
+	Date birthDate;
 	@Column(name = "primaryprovidername")
 	String primaryProviderName;
 	@Column(name = "visitnumber")
@@ -33,26 +41,30 @@ public class AdtDetails {
 	Date admitDateTime;
 	@Column(name = "facilityname")
 	String facilityName;
-//	enum patientClassCode {}
-//	enum admissionTypeCode {}
+	@Column(name = "patientclasscode")
+	String patientClassCode;
+	@Column(name = "admissiontypecode")
+	String admissionTypeCode;
 	@Column(name = "attendingphysician")
 	String attendingPhysician;
 	@Column(name = "dischargedatetime")
 	Date dischargeDateType;
 	@Column(name = "lengthofstay")
 	String lengthOfStay;
-//	enum dischargeDispositionCode {}
+	@Column(name = "dischargedispositioncode")
+	String dischargeDispositionCode;
 	@Column(name = "diagnosiscoding")
-	Code diagnosisCoding;
+	String diagnosisCoding;
 	@Column(name = "clnclasdxcat")
 	String clnclasdxcat;
 	@Column(name = "clnclasdxchapter")
 	String clnclasdxChapter;
 	@Column(name = "diagnosisleakage")
 	String diagnosisLeakage;
-//	enum diagnosisTypeCode {}
+	@Column(name = "diagnosistypecode")
+	String diagnosisTypeCode;
 	@Column(name = "procedurecode")
-	Code procedureCoding;
+	String procedureCoding;
 	@Column(name = "clnclaspxcat")
 	String clnclaspxcat;
 	@Column(name = "clnclaspxchapter")
@@ -60,7 +72,23 @@ public class AdtDetails {
 	@Column(name = "procedureleakage")
 	String procedureLeakage;
 	@Column(name = "isunplannedadmit")
-	boolean isUnplannedAdmit;
+	String unplannedAdmit;
+
+	public Integer getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(int identifier) {
+		this.identifier = identifier;
+	}
+
+	public String getIsUnplannedAdmit() {
+		return unplannedAdmit;
+	}
+
+	public void setIsUnplannedAdmit(String unplannedAdmit) {
+		this.unplannedAdmit = unplannedAdmit;
+	}
 
 	public String getMedicareHealthInsCardNumber() {
 		return medicareHealthInsCardNumber;
@@ -70,21 +98,53 @@ public class AdtDetails {
 		this.medicareHealthInsCardNumber = medicareHealthInsCardNumber;
 	}
 
-	public String getAcoid() {
-		return acoid;
+	public String getAcoIdentifier() {
+		return acoIdentifier;
 	}
 
-	public void setAcoid(String acoid) {
-		this.acoid = acoid;
+	public void setAcoIdentifier(String acoIdentifier) {
+		this.acoIdentifier = acoIdentifier;
 	}
 
-//	public String getDemographicsReference() {
-//		return demographicsReference;
-//	}
-//
-//	public void setDemographicsReference(String demographicsReference) {
-//		this.demographicsReference = demographicsReference;
-//	}
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddlename() {
+		return middleName;
+	}
+
+	public void setMiddlename(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
 
 	public String getPrimaryProviderName() {
 		return primaryProviderName;
@@ -142,14 +202,6 @@ public class AdtDetails {
 		this.lengthOfStay = lengthOfStay;
 	}
 
-	public Code getDiagnosisCoding() {
-		return diagnosisCoding;
-	}
-
-	public void setDiagnosisCoding(Code diagnosisCoding) {
-		this.diagnosisCoding = diagnosisCoding;
-	}
-
 	public String getClnclasdxcat() {
 		return clnclasdxcat;
 	}
@@ -172,14 +224,6 @@ public class AdtDetails {
 
 	public void setDiagnosisLeakage(String diagnosisLeakage) {
 		this.diagnosisLeakage = diagnosisLeakage;
-	}
-
-	public Code getProcedureCoding() {
-		return procedureCoding;
-	}
-
-	public void setProcedureCoding(Code procedureCoding) {
-		this.procedureCoding = procedureCoding;
 	}
 
 	public String getClnclaspxcat() {
@@ -206,12 +250,71 @@ public class AdtDetails {
 		this.procedureLeakage = procedureLeakage;
 	}
 
-	public boolean isUnplannedAdmit() {
-		return isUnplannedAdmit;
+	public String getMiddleName() {
+		return middleName;
 	}
 
-	public void setUnplannedAdmit(boolean isUnplannedAdmit) {
-		this.isUnplannedAdmit = isUnplannedAdmit;
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
 
+	public String getPatientClassCode() {
+		return patientClassCode;
+	}
+
+	public void setPatientClassCode(String patientClassCode) {
+		this.patientClassCode = patientClassCode;
+	}
+
+	public String getAdmissionTypeCode() {
+		return admissionTypeCode;
+	}
+
+	public void setAdmissionTypeCode(String admissionTypeCode) {
+		this.admissionTypeCode = admissionTypeCode;
+	}
+
+	public String getDischargeDispositionCode() {
+		return dischargeDispositionCode;
+	}
+
+	public void setDischargeDispositionCode(String dischargeDispositionCode) {
+		this.dischargeDispositionCode = dischargeDispositionCode;
+	}
+
+	public String getDiagnosisCoding() {
+		return diagnosisCoding;
+	}
+
+	public void setDiagnosisCoding(String diagnosisCoding) {
+		this.diagnosisCoding = diagnosisCoding;
+	}
+
+	public String getDiagnosisTypeCode() {
+		return diagnosisTypeCode;
+	}
+
+	public void setDiagnosisTypeCode(String diagnosisTypeCode) {
+		this.diagnosisTypeCode = diagnosisTypeCode;
+	}
+
+	public String getProcedureCoding() {
+		return procedureCoding;
+	}
+
+	public void setProcedureCoding(String procedureCoding) {
+		this.procedureCoding = procedureCoding;
+	}
+
+	public String getUnplannedAdmit() {
+		return unplannedAdmit;
+	}
+
+	public void setUnplannedAdmit(String unplannedAdmit) {
+		this.unplannedAdmit = unplannedAdmit;
+	}
+
+	public void setIdentifier(Integer identifier) {
+		this.identifier = identifier;
+	}
 }

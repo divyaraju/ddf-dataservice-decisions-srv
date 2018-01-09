@@ -1,7 +1,12 @@
 //package com.lumeris.dataplatform.dataservice.decisions.models;
 //
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//
+//@Entity
 //public class RiskDrivers {
 //
+//	@Column(name = "max_sdh_value")
 //	String id;
 //	String description;
 //	String value;

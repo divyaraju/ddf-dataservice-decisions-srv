@@ -21,8 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.common.collect.Lists;
 import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails;
 import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientRosterItem;
-import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientRosterItem.GenderEnum;
-import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientRosterItem.ReadmitRiskValueEnum;
+import com.lumeris.dataplatform.dataservice.decisions.bindingservice.CommonUtility;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.AdtDetails;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientRosterSummary;
 import com.lumeris.dataplatform.dataservice.decisions.data.service.DecisionsBO;
@@ -84,14 +83,14 @@ public class V1ApiController implements V1Api {
 		for (PatientRosterSummary patientRosterSummary : patientRosterSummaries) {
 			PatientRosterItem patientRosterItem = new PatientRosterItem();
 			patientRosterItem.setAcoId(patientRosterSummary.getAcoIdentifier());
-			patientRosterItem.setAdtDate(LocalDate.parse(patientRosterSummary.getDate()));
+//			patientRosterItem.setAdtDate(LocalDate.parse(patientRosterSummary.getDate()));
 			patientRosterItem.setAdtFacility(patientRosterSummary.getAdtFacility());
 			patientRosterItem.setAdtStatus(patientRosterSummary.getAdtStatus());
-			patientRosterItem.setBirthDate(LocalDate.parse(patientRosterSummary.getBirthDate()));
+//			patientRosterItem.setBirthDate(LocalDate.parse(patientRosterSummary.getBirthDate()));
 			patientRosterItem.setFirstName(patientRosterSummary.getFirstName());
 			patientRosterItem.setMiddleName(patientRosterSummary.getMiddlename());
 			patientRosterItem.setLastName(patientRosterSummary.getLastName());
-			patientRosterItem.setGender(GenderEnum.F);
+			patientRosterItem.setGender(CommonUtility.getGender(patientRosterSummary.getGender()));
 			patientRosterItem.setInPatientVisitsPrior6M(patientRosterSummary.getInPatientVisitsPrior6M());
 			patientRosterItem.setOutPatientVisitsPrior6M(patientRosterSummary.getOutPatientVisitsPrior6M());
 			patientRosterItem.setEmergencyDeptVisitsPrior6M(patientRosterSummary.getEmergencyDeptVisitsPrior6M());
@@ -100,7 +99,7 @@ public class V1ApiController implements V1Api {
 			patientRosterItem.setPatientNumber(patientRosterSummary.getPatientNumber());
 			patientRosterItem.setPrimaryCareProvider(patientRosterSummary.getPrimaryCareProvider());
 			patientRosterItem.setPrimaryClinic(patientRosterSummary.getPrimaryClinic());
-			patientRosterItem.setReadmitRiskValue(ReadmitRiskValueEnum.HIGH);
+			patientRosterItem.setReadmitRiskValue(CommonUtility.getReadmitRiskValueEnum(patientRosterSummary.getReadmitRiskValue()));
 			patientRosterItem.setUnplannedAdmit(patientRosterSummary.getUnplannedAdmit());
 			patientRosterItems.add(patientRosterItem);
 		}

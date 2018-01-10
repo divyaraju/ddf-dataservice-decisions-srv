@@ -3,6 +3,8 @@ package com.lumeris.dataplatform.dataservice.decisions.api.models;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,6 +32,7 @@ public class PatientRosterItem   {
   private String firstName = null;
 
   @JsonProperty("middleName")
+  @JsonInclude(Include.NON_NULL)
   private String middleName = null;
 
   @JsonProperty("lastName")

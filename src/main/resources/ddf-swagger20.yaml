@@ -1,0 +1,337 @@
+---
+swagger: "2.0"
+info:
+  description: "Decisions Dataservice"
+  version: "v1"
+  title: "Decisions API"
+  contact:
+    name: "Divya Penmetsa"
+    url: "https://confluence.lumeris.com/display/PM/Decisions"
+    email: "spenmetsa@lumeris.com"
+host: "lumeris.io"
+basePath: "/dataservice/decisions"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /v1/patientRoster:
+    get:
+      tags:
+      - "decisions-controller"
+      summary: "Produces Patient Roster document with list of Extracts and Risk Models\
+        \ for the provided client and patient Id."
+      description: "Produces Patient Roster document with list of Extracts and Risk\
+        \ Models for the provided client and patient Id."
+      operationId: "getPatientRosterSummaryUsingGET"
+      produces:
+      - "*/*"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PatientRosterItem"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+        500:
+          description: "Server error"
+    x-restlet:
+      section: "Roster"
+  /v1/patientDetails:
+    get:
+      tags:
+      - "decisions-controller"
+      summary: "Produces Patient Roster document with list of Extracts and Risk Models\
+        \ for the provided client and patient Id."
+      description: "Produces Patient Roster document with list of Extracts and Risk\
+        \ Models for the provided client and patient Id."
+      operationId: "getPatientDetailsByIdUsingGET"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "patientid"
+        in: "query"
+        required: true
+        type: "string"
+        description: "Full Name of the patient where patient-name starts with provided\
+          \ value."
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PatientDetails"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+        500:
+          description: "Server error"
+    x-restlet:
+      section: "Details"
+securityDefinitions:
+  access_token:
+    type: "apiKey"
+    name: "access_token"
+    in: "query"
+  Authorization:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+definitions:
+  PatientRosterItem:
+    type: "object"
+    required:
+    - "firstName"
+    - "id"
+    - "lastName"
+    properties:
+      id:
+        type: "string"
+        description: "Patient Identifier"
+      acoId:
+        type: "string"
+        description: "ACO identifier"
+      patientNumber:
+        type: "string"
+      firstName:
+        type: "string"
+        description: "Patient's first name"
+      middleName:
+        type: "string"
+        description: "Patient's middle name"
+      lastName:
+        type: "string"
+        description: "Patient's last name"
+      gender:
+        type: "string"
+        enum:
+        - "M"
+        - "F"
+        - "O"
+        minLength: 1
+        maxLength: 1
+      birthDate:
+        type: "string"
+        format: "date"
+        description: "Matching the \"2012-04-23T18:25:43.511Z\" format"
+      primaryClinic:
+        type: "string"
+      primaryCareProvider:
+        type: "string"
+      adtStatus:
+        type: "string"
+      adtDate:
+        type: "string"
+        format: "date"
+        description: "Matching the \"2012-04-23T18:25:43.511Z\" format"
+      adtFacility:
+        type: "string"
+      patientClass:
+        type: "string"
+      emergencyDeptVisitsPrior6M:
+        type: "string"
+      inPatientVisitsPrior6M:
+        type: "string"
+      outPatientVisitsPrior6M:
+        type: "string"
+      unplannedAdmit:
+        type: "string"
+      readmitRiskValue:
+        type: "string"
+        enum:
+        - "LOW"
+        - "MODERATE"
+        - "NONE"
+        - "HIGH"
+      commercialInsurancePolicy:
+        type: "string"
+    description: "Each item composing the roster: basic information about the patient."
+    x-restlet:
+      section: "Roster"
+  PatientDetails:
+    type: "object"
+    required:
+    - "firstName"
+    - "gender"
+    - "id"
+    - "lastName"
+    properties:
+      id:
+        type: "string"
+        description: "Patient id"
+      firstName:
+        type: "string"
+        description: "Patient's first name"
+      middleName:
+        type: "string"
+        description: "Patient's middle name"
+      lastName:
+        type: "string"
+        description: "Patient's last name"
+      gender:
+        type: "string"
+        description: "Patient's gender in 1 character: (M)ale, (F)emale, or (O)ther"
+        enum:
+        - "M"
+        - "F"
+        - "O"
+        minLength: 1
+        maxLength: 1
+      birthDate:
+        type: "string"
+        format: "date"
+        description: "Matching the \"2012-04-23T18:25:43.511Z\" format"
+      adtDetails:
+        type: "array"
+        description: "ADT details for this patient"
+        items:
+          $ref: "#/definitions/AdtDetails"
+      riskModels:
+        type: "array"
+        description: "Risk models"
+        items:
+          $ref: "#/definitions/RiskModel"
+    x-restlet:
+      section: "Details"
+  RiskModel:
+    type: "object"
+    required:
+    - "eligibilityId"
+    - "id"
+    - "scoreDateTime"
+    properties:
+      id:
+        type: "string"
+        description: "Risk model's identifier"
+      eligibilityId:
+        type: "string"
+        description: "Eligibility identifier"
+      scoreDateTime:
+        type: "string"
+        format: "date-time"
+        description: "Date and time when the score was computed, matching the \"2012-04-23T18:25:43.511Z\"\
+          \ format"
+        example: "\"scoreDateTime\": \"2012-04-23T18:25:43.511Z\""
+      riskClasses:
+        type: "array"
+        items:
+          $ref: "#/definitions/RiskClass"
+    x-restlet:
+      section: "Details"
+  RiskClass:
+    type: "object"
+    required:
+    - "classDescription"
+    - "sdhValue"
+    properties:
+      sdhValue:
+        type: "number"
+        description: "SDH Value"
+      classDescription:
+        type: "string"
+        description: "Description of the risk class"
+      riskDrivers:
+        type: "array"
+        description: "Drivers"
+        items:
+          $ref: "#/definitions/RiskDriver"
+    x-restlet:
+      section: "Details"
+  RiskDriver:
+    type: "object"
+    required:
+    - "description"
+    - "id"
+    - "value"
+    properties:
+      id:
+        type: "string"
+        description: "Driver's identifier"
+      description:
+        type: "string"
+        description: "Driver description"
+      value:
+        type: "string"
+        description: "Driver value"
+      contribution:
+        type: "string"
+        description: "Driver contribution"
+    description: "Risk driver."
+    x-restlet:
+      section: "Details"
+  AdtDetails:
+    type: "object"
+    properties:
+      acoId:
+        type: "string"
+      admissionTypeCode:
+        type: "string"
+      admitDateTime:
+        type: "string"
+        format: "date-time"
+        description: "Matching the \"2012-04-23T18:25:43.511Z\" format"
+      attendingPhysician:
+        type: "string"
+      clinicalClassificationDiagnosisChapter:
+        type: "string"
+        description: "Clinical Classification Diagnosis Chapter"
+      clinicalClassificationDiagnosisCategory:
+        type: "string"
+        description: "Clinical Classification Diagnosis Category"
+      clinicalClassificationProcedureChapter:
+        type: "string"
+        description: "Clinical Classification Procedure Chapter"
+      clinicalClassificationProcedureCategory:
+        type: "string"
+        description: "Clinical Classification Procedure Category"
+      diagnosisCoding:
+        type: "string"
+      diagnosisLeakage:
+        type: "string"
+      diagnosisTypeCode:
+        type: "string"
+      dischargeDateTime:
+        type: "string"
+        format: "date-time"
+        description: "Matching the \"2012-04-23T18:25:43.511Z\" format"
+        example: "\"dischargeDateTime\": \"2012-04-23T18:25:43.511Z\""
+      dischargeDispositionCode:
+        type: "string"
+      facilityName:
+        type: "string"
+      isUnplannedAdmit:
+        type: "string"
+      lengthOfStay:
+        type: "integer"
+        description: "Length of stay in days"
+      patientClassCode:
+        type: "string"
+      primaryProviderName:
+        type: "string"
+      procedureCoding:
+        type: "string"
+      procedureLeakage:
+        type: "string"
+      unplannedAdmit:
+        type: "string"
+      visitNumber:
+        type: "string"
+    x-restlet:
+      section: "Details"
+x-restlet:
+  sections:
+    Roster:
+      description: "Focus on a list of patients or roster."
+    Details:
+      description: "Focuses on details for a single patient."

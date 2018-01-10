@@ -1,0 +1,6 @@
+ SELECT DISTINCT lr.person_nbr AS patientid,
+    lr.drvr_id AS driverid,
+    lr.drvr_desccription AS driveriddesc,
+    lr.drvr_value AS driveridvalue,
+    lr.drvr_contribution AS driveridcontribution
+   FROM msj_a2591_production.a2591_latest_risk lr;

@@ -1,0 +1,14 @@
+ SELECT DISTINCT lr.person_nbr AS patient_id,
+    lr.client_model_id AS clientmodelid,
+    lr.elgidentifier,
+    lr.risk_class AS riskclass,
+    lr.sdh_value AS sdhvalue,
+    risk.sdh_value AS maxsdhvalue,
+    lr.score_date_time AS scoredatetime,
+    lr.drvr_id AS driverid,
+    lr.drvr_desccription AS driveriddesc,
+    lr.drvr_value AS driveridvalue,
+    lr.drvr_contribution AS drivercontribution
+   FROM msj_a2591_production.a2591_latest_risk lr
+     JOIN LATERAL msj_a2591_production.riskscoreview(NULL::integer, lr.person_nbr) risk(patient_id, sdh_type, sdh_value, stratification) ON lr.person_nbr::text = risk.patient_id::text AND lr.risk_class::text = risk.sdh_type::text
+  ORDER BY lr.client_model_id, lr.risk_class, risk.sdh_value, lr.drvr_id;

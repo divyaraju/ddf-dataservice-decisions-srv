@@ -1,0 +1,5 @@
+ SELECT DISTINCT lr.person_nbr AS patientid,
+    lr.risk_class AS riskclass,
+    lr.sdh_value AS sdhvalue,
+    lr.score_date_time AS scoredatetime
+   FROM msj_a2591_production.a2591_latest_risk lr;

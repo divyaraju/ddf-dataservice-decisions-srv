@@ -1,0 +1,4 @@
+ SELECT DISTINCT lr.person_nbr AS patientid,
+    lr.elgidentifier,
+    lr.client_model_id AS clientmodelid
+   FROM msj_a2591_production.a2591_latest_risk lr;

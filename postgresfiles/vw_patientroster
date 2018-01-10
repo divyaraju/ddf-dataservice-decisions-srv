@@ -1,0 +1,24 @@
+Select distinct
+	ae.identifier
+	, ae.medicarehealthinscardnumber as patientid
+	, ae.acoidentifier
+	, ae.patientnumber
+	, ae.firstname
+	, (select distinct middlename from msj_a2591_production.a2591_latest_extracts where medicarehic = ae.medicarehealthinscardnumber) "middlename"
+	, ae.lastname
+	, (select distinct gendercode from msj_a2591_production.a2591_latest_extracts where medicarehic = ae.medicarehealthinscardnumber) "gender"
+	, (select distinct birthdate from msj_a2591_production.a2591_latest_extracts where medicarehic = ae.medicarehealthinscardnumber) "birthdate"
+--	, cast (le.age as numeric(3))
+	, ae.primaryclinic
+	, ae.primarycareprovider
+	, ae.adtstatus
+	, ae.adtdate "date"
+	, ae.adtfacility "facility"
+	, ae.adtpatientclass "patientclass"
+	, ae.numedprior6m "emergencydeptvisitsprior6m"
+	, ae.numipprior6m "inpatientvisitsprior6m"
+	, ae.numopprior6m "outpatientvisitsprior6m"
+	, ae.unplnadmit "unplannedadmit"
+	, ae.readmitrisk "readmitriskvalue"
+	, ae.commercialinsurancepolicy1 "commercialinsurancepolicy"
+from msj_a2591_production.a2591_elg ae

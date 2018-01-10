@@ -22,6 +22,8 @@ import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientRosterIt
 import com.lumeris.dataplatform.dataservice.decisions.bindingservice.CommonUtility;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.AdtDetails;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientRosterSummary;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.RiskClass;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.RiskDrivers;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.RiskModel;
 import com.lumeris.dataplatform.dataservice.decisions.data.service.DecisionsBO;
 
@@ -39,13 +41,13 @@ public class V1ApiController implements V1Api {
 	@Autowired
 	DecisionsBO decisionsBO;
 
-    @GetMapping( produces = { "application/json"})
-    public ResponseEntity<List<PatientRosterItem>> getPatientRosterSummaryUsingGET() {
+	@GetMapping(produces = { "application/json" })
+	public ResponseEntity<List<PatientRosterItem>> getPatientRosterSummaryUsingGET() {
 		List<PatientRosterSummary> patientRosterSummaries = Lists.newArrayList();
 
 		if (decisionsBO == null) {
-			logger.error("DECISION BO IS NULL");
-			return new ResponseEntity<List<PatientRosterItem>>(HttpStatus.INTERNAL_SERVER_ERROR); 
+			logger.error("DECISION BO is not defined");
+			return new ResponseEntity<List<PatientRosterItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		try {
 			patientRosterSummaries = decisionsBO.findAll();
@@ -59,10 +61,10 @@ public class V1ApiController implements V1Api {
 		for (PatientRosterSummary patientRosterSummary : patientRosterSummaries) {
 			PatientRosterItem patientRosterItem = new PatientRosterItem();
 			patientRosterItem.setAcoId(patientRosterSummary.getAcoIdentifier());
-//			patientRosterItem.setAdtDate(LocalDate.parse(patientRosterSummary.getDate()));
+			// patientRosterItem.setAdtDate(LocalDate.parse(patientRosterSummary.getDate()));
 			patientRosterItem.setAdtFacility(patientRosterSummary.getAdtFacility());
 			patientRosterItem.setAdtStatus(patientRosterSummary.getAdtStatus());
-//			patientRosterItem.setBirthDate(LocalDate.parse(patientRosterSummary.getBirthDate()));
+			// patientRosterItem.setBirthDate(LocalDate.parse(patientRosterSummary.getBirthDate()));
 			patientRosterItem.setFirstName(patientRosterSummary.getFirstName());
 			patientRosterItem.setMiddleName(patientRosterSummary.getMiddlename());
 			patientRosterItem.setLastName(patientRosterSummary.getLastName());
@@ -75,40 +77,51 @@ public class V1ApiController implements V1Api {
 			patientRosterItem.setPatientNumber(patientRosterSummary.getPatientNumber());
 			patientRosterItem.setPrimaryCareProvider(patientRosterSummary.getPrimaryCareProvider());
 			patientRosterItem.setPrimaryClinic(patientRosterSummary.getPrimaryClinic());
-			patientRosterItem.setReadmitRiskValue(CommonUtility.getReadmitRiskValueEnum(patientRosterSummary.getReadmitRiskValue()));
+			patientRosterItem.setReadmitRiskValue(
+					CommonUtility.getReadmitRiskValueEnum(patientRosterSummary.getReadmitRiskValue()));
 			patientRosterItem.setUnplannedAdmit(patientRosterSummary.getUnplannedAdmit());
 			patientRosterItems.add(patientRosterItem);
 		}
 
-		ResponseEntity<List<PatientRosterItem>> responseEntity = new ResponseEntity<List<PatientRosterItem>>(patientRosterItems, HttpStatus.OK);
+		ResponseEntity<List<PatientRosterItem>> responseEntity = new ResponseEntity<List<PatientRosterItem>>(
+				patientRosterItems, HttpStatus.OK);
 		return responseEntity;
-    }
+	}
 
 	@Override
-	public ResponseEntity<PatientDetails> getPatientDetailsByIdUsingGET( @NotNull@ApiParam(value = "Full Name of the patient where patient-name starts with provided value.", required = true) @RequestParam(value = "patientid", required = true) String patientid) {
+	public ResponseEntity<PatientDetails> getPatientDetailsByIdUsingGET(
+			@NotNull @ApiParam(value = "Full Name of the patient where patient-name starts with provided value.", required = true) @RequestParam(value = "patientid", required = true) String patientid) {
 		PatientDetails patientDetails;
 		AdtDetails adtDetails = new AdtDetails();
 		List<AdtDetails> detailsList = Lists.newArrayList();
 		List<RiskModel> riskModels = Lists.newArrayList();
-		
+		List<RiskClass> riskClasses = Lists.newArrayList();
+		List<RiskDrivers> riskDrivers = Lists.newArrayList();
 		if (decisionsBO == null) {
 			logger.error("DECISION BO IS NULL");
-			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR); 
+			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		try {
 			detailsList = decisionsBO.getAdtDetails(patientid);
+			logger.info("We have " + detailsList.size() + " detail(s).");
+
 			riskModels = decisionsBO.getRiskModelDetails(patientid);
+			logger.info("We have " + riskModels.size() + " model(s).");
+
+			riskClasses = decisionsBO.getRiskClassDetails(patientid);
+			logger.info("We have " + riskClasses.size() + " model(s).");
 			
-			System.out.println("SIZEE" +detailsList.size());
-			System.out.println("SIZEE" +riskModels.size());
+			riskDrivers = decisionsBO.getRiskDriversDetails(patientid);
+			logger.info("We have " + riskDrivers.size() + " model(s).");
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		patientDetails = new PatientDetails();
-//		patientDetails.setAdtDetails(adtDetails);
-//		patientDetails.setRiskModels(riskModels);
-//		patientDetails.getFirstName();
+		// patientDetails.setAdtDetails(adtDetails);
+		// patientDetails.setRiskModels(riskModels);
+		// patientDetails.getFirstName();
 
 		List<PatientRosterItem> patientRosterItems = Lists.newArrayList();
 		return new ResponseEntity<PatientDetails>(HttpStatus.OK);

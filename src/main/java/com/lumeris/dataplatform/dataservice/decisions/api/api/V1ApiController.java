@@ -1,12 +1,14 @@
 package com.lumeris.dataplatform.dataservice.decisions.api.api;
 
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.common.collect.Lists;
 import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails;
 import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientRosterItem;
+import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientRosterItem.GenderEnum;
+import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientRosterItem.ReadmitRiskValueEnum;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.AdtDetails;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientRosterSummary;
 import com.lumeris.dataplatform.dataservice.decisions.data.service.DecisionsBO;
 
@@ -36,9 +41,27 @@ public class V1ApiController implements V1Api {
 	@Autowired
 	DecisionsBO decisionsBO;
 
-    public ResponseEntity<PatientDetails> getPatientDetailsByIdUsingGET( @NotNull@ApiParam(value = "Full Name of the patient where patient-name starts with provided value.", required = true) @RequestParam(value = "patientid", required = true) String patientid) {
-        // do some magic!
-        return new ResponseEntity<PatientDetails>(HttpStatus.OK);
+	@GetMapping( produces = { "application/json"}, value = "disabled")
+   public ResponseEntity<PatientDetails> getPatientDetailsByIdUsingGET( @NotNull@ApiParam(value = "Full Name of the patient where patient-name starts with provided value.", required = true) @RequestParam(value = "patientid", required = true) String patientid) {
+		List<AdtDetails> adtDetails = Lists.newArrayList();
+
+		if (decisionsBO == null) {
+			logger.error("DECISION BO IS NULL");
+			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		try {
+			adtDetails = decisionsBO.getAdtDetails(patientid);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails apiPatientDetails = new com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails();
+		apiPatientDetails.setAdtDetails(null);
+
+		ResponseEntity<com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails> responseEntityApi = new ResponseEntity<com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails>(apiPatientDetails, HttpStatus.OK);
+		return null;
     }
 
     @GetMapping( produces = { "application/json"})
@@ -57,16 +80,30 @@ public class V1ApiController implements V1Api {
 			return new ResponseEntity<List<PatientRosterItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		List<PatientRosterItem> patientRosterItems = Lists.newArrayList();
-		
+
 		for (PatientRosterSummary patientRosterSummary : patientRosterSummaries) {
-			System.out.println("FIRSTT NAME" +patientRosterSummary.getFirstName());
 			PatientRosterItem patientRosterItem = new PatientRosterItem();
 			patientRosterItem.setAcoId(patientRosterSummary.getAcoIdentifier());
+			patientRosterItem.setAdtDate(LocalDate.parse(patientRosterSummary.getDate()));
+			patientRosterItem.setAdtFacility(patientRosterSummary.getAdtFacility());
+			patientRosterItem.setAdtStatus(patientRosterSummary.getAdtStatus());
+			patientRosterItem.setBirthDate(LocalDate.parse(patientRosterSummary.getBirthDate()));
 			patientRosterItem.setFirstName(patientRosterSummary.getFirstName());
+			patientRosterItem.setMiddleName(patientRosterSummary.getMiddlename());
+			patientRosterItem.setLastName(patientRosterSummary.getLastName());
+			patientRosterItem.setGender(GenderEnum.F);
+			patientRosterItem.setInPatientVisitsPrior6M(patientRosterSummary.getInPatientVisitsPrior6M());
+			patientRosterItem.setOutPatientVisitsPrior6M(patientRosterSummary.getOutPatientVisitsPrior6M());
+			patientRosterItem.setEmergencyDeptVisitsPrior6M(patientRosterSummary.getEmergencyDeptVisitsPrior6M());
+			patientRosterItem.setCommercialInsurancePolicy(patientRosterSummary.getCommercialInsurancePolicy());
+			patientRosterItem.setPatientClass(patientRosterSummary.getPatientClass());
+			patientRosterItem.setPatientNumber(patientRosterSummary.getPatientNumber());
+			patientRosterItem.setPrimaryCareProvider(patientRosterSummary.getPrimaryCareProvider());
+			patientRosterItem.setPrimaryClinic(patientRosterSummary.getPrimaryClinic());
+			patientRosterItem.setReadmitRiskValue(ReadmitRiskValueEnum.HIGH);
+			patientRosterItem.setUnplannedAdmit(patientRosterSummary.getUnplannedAdmit());
 			patientRosterItems.add(patientRosterItem);
-			//if (patientRosterItems.size() > 5) break;
 		}
-		//System.out.println("PatientRosterItems" +patientRosterItems.size());
 
 		ResponseEntity<List<PatientRosterItem>> responseEntity = new ResponseEntity<List<PatientRosterItem>>(patientRosterItems, HttpStatus.OK);
 		return responseEntity;

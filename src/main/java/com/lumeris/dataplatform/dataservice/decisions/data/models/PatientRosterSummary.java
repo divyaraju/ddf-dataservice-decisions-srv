@@ -1,7 +1,5 @@
 package com.lumeris.dataplatform.dataservice.decisions.data.models;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,21 +32,20 @@ public class PatientRosterSummary {
 	String gender;
 	@Column(name = "birthdate")
 	String birthDate;
+	@Column(name = "age")
+	String age;
 	@Column(name = "primaryclinic")
 	String primaryClinic;
 	@Column(name = "primarycareprovider")
 	String primaryCareProvider;
-
-	// enum adtStatus {
-	// }
-
-	// Date date;
+	@Column(name = "adtstatus")
+	String adtStatus;
+	@Column(name = "date")
+	String date;
 	@Column(name = "facility")
 	String adtFacility;
-
-	// enum patientClass {
-	// }
-
+	@Column(name = "patientclass")
+	String patientClass;
 	@Column(name = "emergencydeptvisitsprior6m")
 	String emergencyDeptVisitsPrior6M;
 	@Column(name = "inpatientvisitsprior6m")
@@ -57,7 +54,8 @@ public class PatientRosterSummary {
 	String outPatientVisitsPrior6M;
 	@Column(name = "unplannedadmit")
 	String unplannedAdmit;
-	// enum readmitRiskValue {};
+	@Column(name = "readmitriskvalue")
+	String readmitRiskValue;
 	@Column(name = "commercialinsurancepolicy")
 	String commercialInsurancePolicy;
 
@@ -117,14 +115,6 @@ public class PatientRosterSummary {
 		this.birthDate = birthDate;
 	}
 
-	// public int getAge() {
-	// return age;
-	// }
-	//
-	// public void setAge(int age) {
-	// this.age = age;
-	// }
-
 	public String getPrimaryClinic() {
 		return primaryClinic;
 	}
@@ -148,14 +138,6 @@ public class PatientRosterSummary {
 	public void setUnplannedAdmit(String unplannedAdmit) {
 		this.unplannedAdmit = unplannedAdmit;
 	}
-
-	// public Date getDate() {
-	// return date;
-	// }
-	//
-	// public void setDate(Date date) {
-	// this.date = date;
-	// }
 
 	public String getadtFacility() {
 		return adtFacility;
@@ -195,5 +177,73 @@ public class PatientRosterSummary {
 
 	public void setCommercialInsurancePolicy(String commercialInsurancePolicy) {
 		this.commercialInsurancePolicy = commercialInsurancePolicy;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getMiddlename() {
+		return middlename;
+	}
+
+	public void setMiddlename(String middlename) {
+		this.middlename = middlename;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getAdtStatus() {
+		return adtStatus;
+	}
+
+	public void setAdtStatus(String adtStatus) {
+		this.adtStatus = adtStatus;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getAdtFacility() {
+		return adtFacility;
+	}
+
+	public void setAdtFacility(String adtFacility) {
+		this.adtFacility = adtFacility;
+	}
+
+	public String getPatientClass() {
+		return patientClass;
+	}
+
+	public void setPatientClass(String patientClass) {
+		this.patientClass = patientClass;
+	}
+
+	public String getReadmitRiskValue() {
+		return readmitRiskValue;
+	}
+
+	public void setReadmitRiskValue(String readmitRiskValue) {
+		this.readmitRiskValue = readmitRiskValue;
+	}
+
+	public void setMedicareHealthInsCardNumber(String medicareHealthInsCardNumber) {
+		this.medicareHealthInsCardNumber = medicareHealthInsCardNumber;
 	}
 }

@@ -7,20 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@IdClass(AdtDetailsId.class)
 @Table(name = "vw_patientdetail")
 public class AdtDetails {
 
 	@Id
-	@Column(name = "identifier", nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	Integer identifier;
 	@Column(name = "patientid")
 	String medicareHealthInsCardNumber;
+	@Id
+	@Column(name = "visitnumber")
+	String visitNumber;
 	@Column(name = "acoidentifier")
 	String acoIdentifier;
 	@Column(name = "firstname")
@@ -35,8 +36,6 @@ public class AdtDetails {
 	Date birthDate;
 	@Column(name = "primaryprovidername")
 	String primaryProviderName;
-	@Column(name = "visitnumber")
-	String visitNumber;
 	@Column(name = "admitdatetime")
 	Date admitDateTime;
 	@Column(name = "facilityname")
@@ -73,14 +72,6 @@ public class AdtDetails {
 	String procedureLeakage;
 	@Column(name = "isunplannedadmit")
 	String unplannedAdmit;
-
-	public Integer getIdentifier() {
-		return identifier;
-	}
-
-	public void setIdentifier(int identifier) {
-		this.identifier = identifier;
-	}
 
 	public String getIsUnplannedAdmit() {
 		return unplannedAdmit;
@@ -312,9 +303,5 @@ public class AdtDetails {
 
 	public void setUnplannedAdmit(String unplannedAdmit) {
 		this.unplannedAdmit = unplannedAdmit;
-	}
-
-	public void setIdentifier(Integer identifier) {
-		this.identifier = identifier;
 	}
 }

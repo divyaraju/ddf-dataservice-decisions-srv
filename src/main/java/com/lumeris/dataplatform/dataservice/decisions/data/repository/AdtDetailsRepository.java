@@ -8,6 +8,6 @@ import com.lumeris.dataplatform.dataservice.decisions.data.models.AdtDetails;
 
 public interface AdtDetailsRepository extends JpaRepository<AdtDetails, String> {
 
-	public List<AdtDetails> findBypatientid(String patient_id);
+	public List<AdtDetails> findByMedicareHealthInsCardNumber(String patient_id);
 
 }

@@ -5,13 +5,19 @@ import java.util.List;
 
 import com.lumeris.dataplatform.dataservice.decisions.data.models.AdtDetails;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientRosterSummary;
-//import com.lumeris.dataplatform.dataservice.decisions.data.models.RiskModel;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.RiskClass;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.RiskDrivers;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.RiskModel;
 
 public interface DecisionsBO {
 
 	public List<AdtDetails> getAdtDetails(String patient_id) throws ParseException;
 	
-//	public List<RiskModel> getRiskModelDetails(String patient_id) throws ParseException;
-	
+	public List<RiskModel> getRiskModelDetails(String patient_id) throws ParseException;
+
+	public List<RiskClass> getRiskClassDetails(String patient_id) throws ParseException;
+
+	public List<RiskDrivers> getRiskDriversDetails(String patient_id) throws ParseException;
+
 	public List<PatientRosterSummary> findAll() throws ParseException;
 }

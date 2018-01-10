@@ -1,29 +1,16 @@
 package com.lumeris.dataplatform.dataservice.decisions.data.models;
 
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-@Entity
-@IdClass(RiskClassId.class)
-@Table(name = "vw_patientclass")
-public class RiskClass {
+public class RiskClassId implements Serializable {
 
-	@Id
+	private static final long serialVersionUID = 8026959996882898092L;
 	@Column(name = "patientid")
 	String medicareHealthInsCardNumber;
-	@Id
 	@Column(name = "sdhvalue")
 	String sdhvalue;
-	@Column(name = "scoredatetime")
-	String scoredatetime;
-	@Id
 	@Column(name = "riskclass")
 	String riskclass;
 
@@ -39,16 +26,12 @@ public class RiskClass {
 	public void setSdhvalue(String sdhvalue) {
 		this.sdhvalue = sdhvalue;
 	}
-	public String getScoredatetime() {
-		return scoredatetime;
-	}
-	public void setScoredatetime(String scoredatetime) {
-		this.scoredatetime = scoredatetime;
-	}
 	public String getRiskclass() {
 		return riskclass;
 	}
 	public void setRiskclass(String riskclass) {
 		this.riskclass = riskclass;
 	}
+
+
 }

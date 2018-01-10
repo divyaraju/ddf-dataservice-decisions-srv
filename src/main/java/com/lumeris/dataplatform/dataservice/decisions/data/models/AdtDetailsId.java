@@ -3,7 +3,6 @@ package com.lumeris.dataplatform.dataservice.decisions.data.models;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 
 public class AdtDetailsId implements Serializable {
 

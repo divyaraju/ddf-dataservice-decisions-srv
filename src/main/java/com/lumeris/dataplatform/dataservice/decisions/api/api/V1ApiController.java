@@ -1,14 +1,12 @@
 package com.lumeris.dataplatform.dataservice.decisions.api.api;
 
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +22,7 @@ import com.lumeris.dataplatform.dataservice.decisions.api.models.PatientRosterIt
 import com.lumeris.dataplatform.dataservice.decisions.bindingservice.CommonUtility;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.AdtDetails;
 import com.lumeris.dataplatform.dataservice.decisions.data.models.PatientRosterSummary;
+import com.lumeris.dataplatform.dataservice.decisions.data.models.RiskModel;
 import com.lumeris.dataplatform.dataservice.decisions.data.service.DecisionsBO;
 
 import io.swagger.annotations.ApiParam;
@@ -40,29 +39,6 @@ public class V1ApiController implements V1Api {
 	@Autowired
 	DecisionsBO decisionsBO;
 
-	@GetMapping( produces = { "application/json"}, value = "disabled")
-   public ResponseEntity<PatientDetails> getPatientDetailsByIdUsingGET( @NotNull@ApiParam(value = "Full Name of the patient where patient-name starts with provided value.", required = true) @RequestParam(value = "patientid", required = true) String patientid) {
-		List<AdtDetails> adtDetails = Lists.newArrayList();
-
-		if (decisionsBO == null) {
-			logger.error("DECISION BO IS NULL");
-			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR); 
-		}
-		try {
-			adtDetails = decisionsBO.getAdtDetails(patientid);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails apiPatientDetails = new com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails();
-		apiPatientDetails.setAdtDetails(null);
-
-		ResponseEntity<com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails> responseEntityApi = new ResponseEntity<com.lumeris.dataplatform.dataservice.decisions.api.models.PatientDetails>(apiPatientDetails, HttpStatus.OK);
-		return null;
-    }
-
     @GetMapping( produces = { "application/json"})
     public ResponseEntity<List<PatientRosterItem>> getPatientRosterSummaryUsingGET() {
 		List<PatientRosterSummary> patientRosterSummaries = Lists.newArrayList();
@@ -74,7 +50,7 @@ public class V1ApiController implements V1Api {
 		try {
 			patientRosterSummaries = decisionsBO.findAll();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 			return new ResponseEntity<List<PatientRosterItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -107,5 +83,35 @@ public class V1ApiController implements V1Api {
 		ResponseEntity<List<PatientRosterItem>> responseEntity = new ResponseEntity<List<PatientRosterItem>>(patientRosterItems, HttpStatus.OK);
 		return responseEntity;
     }
+
+	@Override
+	public ResponseEntity<PatientDetails> getPatientDetailsByIdUsingGET( @NotNull@ApiParam(value = "Full Name of the patient where patient-name starts with provided value.", required = true) @RequestParam(value = "patientid", required = true) String patientid) {
+		PatientDetails patientDetails;
+		AdtDetails adtDetails = new AdtDetails();
+		List<AdtDetails> detailsList = Lists.newArrayList();
+		List<RiskModel> riskModels = Lists.newArrayList();
+		
+		if (decisionsBO == null) {
+			logger.error("DECISION BO IS NULL");
+			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		try {
+			detailsList = decisionsBO.getAdtDetails(patientid);
+			riskModels = decisionsBO.getRiskModelDetails(patientid);
+			
+			System.out.println("SIZEE" +detailsList.size());
+			System.out.println("SIZEE" +riskModels.size());
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		patientDetails = new PatientDetails();
+//		patientDetails.setAdtDetails(adtDetails);
+//		patientDetails.setRiskModels(riskModels);
+//		patientDetails.getFirstName();
+
+		List<PatientRosterItem> patientRosterItems = Lists.newArrayList();
+		return new ResponseEntity<PatientDetails>(HttpStatus.OK);
+	}
 
 }

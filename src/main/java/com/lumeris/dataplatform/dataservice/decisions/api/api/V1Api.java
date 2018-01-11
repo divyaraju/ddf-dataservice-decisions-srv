@@ -37,10 +37,8 @@ public interface V1Api {
         @ApiResponse(code = 500, message = "Server error", response = Void.class) })
     
     @RequestMapping(value = "/v1/patientDetails",
-        produces = { "*/*" }, 
-        consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<PatientDetails> getPatientDetailsByIdUsingGET( @NotNull@ApiParam(value = "Full Name of the patient where patient-name starts with provided value.", required = true) @RequestParam(value = "patientid", required = true) String patientid);
+    PatientDetails getPatientDetailsByIdUsingGET( @NotNull@ApiParam(value = "Full Name of the patient where patient-name starts with provided value.", required = true) @RequestParam(value = "patientid", required = true) String patientid);
 
 
     @ApiOperation(value = "Produces Patient Roster document with list of Extracts and Risk Models for the provided client and patient Id.", notes = "Produces Patient Roster document with list of Extracts and Risk Models for the provided client and patient Id.", response = PatientRosterItem.class, responseContainer = "List", tags={ "decisions-controller", })
@@ -52,9 +50,7 @@ public interface V1Api {
         @ApiResponse(code = 500, message = "Server error", response = Void.class) })
     
     @RequestMapping(value = "/v1/patientRoster",
-        produces = { "*/*" }, 
-        consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<List<PatientRosterItem>> getPatientRosterSummaryUsingGET();
+    List<PatientRosterItem> getPatientRosterSummaryUsingGET();
 
 }

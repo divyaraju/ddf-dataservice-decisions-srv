@@ -11,7 +11,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-09T19:49:40.625Z")
+//@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-09T19:49:40.625Z")
 
 @Configuration
 @EnableSwagger2
@@ -35,8 +35,8 @@ public class SwaggerDocumentationConfig {
                 .select()
                     .apis(RequestHandlerSelectors.basePackage("com.lumeris.dataplatform.dataservice.decisions.api.api"))
                     .build()
-                .directModelSubstitute(org.joda.time.LocalDate.class, java.sql.Date.class)
-                .directModelSubstitute(org.joda.time.DateTime.class, java.util.Date.class)
+//                .directModelSubstitute(org.joda.time.LocalDate.class, java.sql.Date.class)
+//                .directModelSubstitute(org.joda.time.DateTime.class, java.util.Date.class)
                 .apiInfo(apiInfo());
     }
 

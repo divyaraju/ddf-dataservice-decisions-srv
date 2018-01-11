@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 @CrossOrigin
-@Controller
+//@Controller
 public class V1ApiController implements V1Api {
 
 	private static final Log logger = LogFactory.getLog(V1ApiController.class);
@@ -41,20 +41,20 @@ public class V1ApiController implements V1Api {
 	@Autowired
 	DecisionsBO decisionsBO;
 
-	@GetMapping(produces = { "application/json" })
-	public ResponseEntity<List<PatientRosterItem>> getPatientRosterSummaryUsingGET() {
+	//@GetMapping(produces = { "application/json" })
+	public List<PatientRosterItem> getPatientRosterSummaryUsingGET() {
 		List<PatientRosterSummary> patientRosterSummaries = Lists.newArrayList();
 
 		if (decisionsBO == null) {
 			logger.error("DECISION BO is not defined");
-			return new ResponseEntity<List<PatientRosterItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InternalError();
 		}
 		try {
 			patientRosterSummaries = decisionsBO.findAll();
 		} catch (ParseException e) {
 
 			e.printStackTrace();
-			return new ResponseEntity<List<PatientRosterItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InternalError();
 		}
 		List<PatientRosterItem> patientRosterItems = Lists.newArrayList();
 
@@ -83,13 +83,13 @@ public class V1ApiController implements V1Api {
 			patientRosterItems.add(patientRosterItem);
 		}
 
-		ResponseEntity<List<PatientRosterItem>> responseEntity = new ResponseEntity<List<PatientRosterItem>>(
-				patientRosterItems, HttpStatus.OK);
-		return responseEntity;
+//		ResponseEntity<List<PatientRosterItem>> responseEntity = new ResponseEntity<List<PatientRosterItem>>(
+//				patientRosterItems, HttpStatus.OK);
+		return patientRosterItems;
 	}
 
 	@Override
-	public ResponseEntity<PatientDetails> getPatientDetailsByIdUsingGET(
+	public PatientDetails getPatientDetailsByIdUsingGET(
 			@NotNull @ApiParam(value = "Full Name of the patient where patient-name starts with provided value.", required = true) @RequestParam(value = "patientid", required = true) String patientid) {
 		PatientDetails patientDetails;
 		AdtDetails adtDetails = new AdtDetails();
@@ -99,7 +99,7 @@ public class V1ApiController implements V1Api {
 		List<RiskDrivers> riskDrivers = Lists.newArrayList();
 		if (decisionsBO == null) {
 			logger.error("DECISION BO IS NULL");
-			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InternalError();
 		}
 		try {
 			detailsList = decisionsBO.getAdtDetails(patientid);
@@ -116,7 +116,7 @@ public class V1ApiController implements V1Api {
 
 		} catch (ParseException e) {
 			e.printStackTrace();
-			return new ResponseEntity<PatientDetails>(HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InternalError();
 		}
 		patientDetails = new PatientDetails();
 		// patientDetails.setAdtDetails(adtDetails);
@@ -124,7 +124,7 @@ public class V1ApiController implements V1Api {
 		// patientDetails.getFirstName();
 
 		List<PatientRosterItem> patientRosterItems = Lists.newArrayList();
-		return new ResponseEntity<PatientDetails>(HttpStatus.OK);
+		return new PatientDetails();
 	}
 
 }
